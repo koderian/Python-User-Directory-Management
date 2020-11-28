@@ -5,8 +5,14 @@
 import time
 import copy
 import json
-
+from colorama import  Fore, Back, Style
+import getpass
+import console-menu
 path_to_dict =  "./user_login_directory.json"
+
+
+def user_menu():
+
 
 
 def password_set():
@@ -14,8 +20,9 @@ def password_set():
     temp_password = None
     while temp_password is None:
 
-        temp_password = input("Please enter a password\n")
+        temp_password = getpass.getpass(Fore.WHITE + "Please enter a password\n")
         if temp_password == '':
+            print(Fore.RED + "Invalid password, please try again:")
             temp_password = None
 
         else:
@@ -25,24 +32,24 @@ def password_set():
     passwordchck = None
     userPassword = None
     passwordchck = False
-    reenter_Error = "Please confirm password\n"
+    reenter_Error = (Fore.WHITE + "Please confirm password\n")
     loop = 3
     while loop != int(0):
-        passwordchck = input(reenter_Error)
+        passwordchck = getpass.getpass(reenter_Error)
         if passwordchck == temp_password:
             userPassword = copy.copy(passwordchck)
-            print("Password successfully set!")
+            print(Fore.WHITE + "Password successfully set!")
             return
 
 
         elif passwordchck != temp_password:
-            reenter_Error = "Password does not match, please try again\n"
+            reenter_Error = Fore.RED + "Password does not match, please try again:\n"
             loop = loop - int(1)
             print(str(loop) + " tries remaining!")
 
     if loop == 0:
-        password_set()
-1
+        print("Reset failed")
+        return  
 password_set()
-print(userPassword)
+
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
